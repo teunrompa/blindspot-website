@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --font-display: "Special Elite", "Courier Prime", "Courier New", monospace;
+  --font-body: "JetBrains Mono", "Courier New", monospace;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+}
+
+/* collor pallete */
+:root {
+  --color-primary: #0a0b0b; /* void */
+  --color-secondary: #d9d9d7; /* paper */
+  --color-olive: #5e6b2e; /* moss — was --color-tertiary */
+  --color-accent: #c4d7e5; /* annotation blue */
+  --color-highlight: #d10a0e; /* stamp red */
+  --color-muted: #6b6e73;
+  --color-dim: #3f4145;
+  --color-border: #24262a;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ── */
+body {
+  width: 100%;
+  height: 100vh;
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  font-family: var(--font-body);
+  cursor: none;
+  overflow: hidden;
+}
+
+/* ── Display: heavy, poster-style headlines ── */
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--color-secondary);
+  text-transform: lowercase;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--color-secondary);
+  text-transform: lowercase;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--color-secondary);
+}
+
+/* ── Body: readable content ── */
+.text-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-secondary);
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+/* ── Mono: metadata, dates, technical labels ── */
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.text-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ── Eyebrow / label: tiny uppercase markers ── */
+.text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+/* ── Semantic color modifiers (stackable) ── */
+.text-primary {
+  color: var(--color-secondary);
+} /* main text */
+.text-secondary {
+  color: var(--color-muted);
+} /* muted text */
+.text-muted {
+  color: var(--color-dim);
+} /* faint */
+.text-accent {
+  color: var(--color-accent);
+} /* pale blue */
+.text-brand {
+  color: var(--color-brand);
+} /* red */
+.text-highlight {
+  color: var(--color-highlight);
+} /* red, same as brand */
+
+/* ── Weight modifiers ── */
+.text-light {
+  font-weight: 300;
+}
+.text-regular {
+  font-weight: 400;
+}
+.text-bold {
+  font-weight: 700;
+}
+
+/* ── Legacy small-text classes (consider migrating to .text-mono*) ── */
+.label {
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--color-secondary);
+}
+
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+}
+
+.hint {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--color-dim);
+}
+
+.subtitle {
+  font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+}
+
+/* ── Page header with trailing divider line ── */
+.page-header {
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  margin-bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-header::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Cursor dot ── */
+.cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-highlight);
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 4px 2px color-mix(in srgb, var(--color-highlight) 80%, transparent),
+      0 0 16px 6px color-mix(in srgb, var(--color-highlight) 35%, transparent),
+      0 0 40px 12px color-mix(in srgb, var(--color-highlight) 15%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 6px 3px color-mix(in srgb, var(--color-highlight) 90%, transparent),
+      0 0 24px 10px color-mix(in srgb, var(--color-highlight) 45%, transparent),
+      0 0 60px 20px color-mix(in srgb, var(--color-highlight) 10%, transparent);
+  }
+}
+
+/* ── Animations ── */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
