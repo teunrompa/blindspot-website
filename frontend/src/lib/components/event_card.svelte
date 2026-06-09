@@ -1,6 +1,6 @@
 <script lang="ts">
   import { EventStatus, type Event } from "../types/data";
-
+  import { formatDate } from "../utils/formats";
   type Props = {
     event: Event;
     index?: number;
@@ -28,7 +28,7 @@
     >
   </div>
   <div class="event-date">
-    <span class="date-main">{event.date}</span>
+    <span class="date-main">{formatDate(event.date)}</span>
   </div>
   <div class="event-info">
     <h3 class="event-name">{event.name}</h3>

@@ -23,6 +23,7 @@ use crate::stored_types::events::{self, Event};
 #[tokio::main]
 async fn main() {
     dotenvy::dotenv().ok();
+
     tracing_subscriber::fmt()
         .with_env_filter("server=debug,tower_http=debug")
         .init();

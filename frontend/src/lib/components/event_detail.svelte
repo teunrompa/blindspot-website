@@ -1,5 +1,6 @@
 <script lang="ts">
   import { EventStatus, type Event } from "../types/data";
+  import { formatDate } from "../utils/formats";
 
   type Props = {
     event: Event;
@@ -37,7 +38,7 @@
     <aside class="meta-column">
       <div class="meta-row">
         <span class="meta-label">DATE</span>
-        <span class="meta-value">{event.date}</span>
+        <span class="meta-value">{formatDate(event.date)}</span>
       </div>
       <div class="meta-row">
         <span class="meta-label">VENUE</span>
@@ -94,7 +95,7 @@
   </div>
 
   <footer class="detail-footer">
-    <span>OBS. {event.date}</span>
+    <span>OBS. {formatDate(event.date)}</span>
     <span>— HIVE—MIND —</span>
     <span>SPEC. № EV—001</span>
   </footer>
