@@ -30,18 +30,20 @@ async fn main() {
 
     //GET db url from .env
     let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    let pool = PgPool::connect(&db_url).await.unwrap();
+    let pool = PgPool::connect(&db_url).await.unwrap_or_else(|e| {
+        panic!("Error connecting to database {:?}", e);
+    });
 
     sqlx::migrate!("./migrations")
         .run(&pool)
         .await
-        .expect("Failed to run migration");
+        .unwrap_or_else(|e| panic!("Failed to run migrations {:?}", e));
 
     //Setup routing & seriveces
     let app = Router::new()
         .route("/api/users/{id}", get(get_user))
         .route("/api/events", get(get_events))
-        .route("/api/events{id}", get(get_event))
+        .route("/api/events/{id}", get(get_event))
         .route("/api/events/{id}/lineup", get(get_lineup_for_event))
         .with_state(pool)
         .fallback_service(
