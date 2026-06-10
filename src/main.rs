@@ -32,6 +32,11 @@ async fn main() {
     let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let pool = PgPool::connect(&db_url).await.unwrap();
 
+    sqlx::migrate!("./migrations")
+        .run(&pool)
+        .await
+        .expect("Failed to run migration");
+
     //Setup routing & seriveces
     let app = Router::new()
         .route("/api/users/{id}", get(get_user))
@@ -49,6 +54,8 @@ async fn main() {
                 .allow_methods(Any)
                 .allow_headers(Any),
         );
+
+    info!("Migratios applied successfully");
 
     let addr = "0.0.0.0:3000";
     let listner = tokio::net::TcpListener::bind(addr).await.unwrap();
